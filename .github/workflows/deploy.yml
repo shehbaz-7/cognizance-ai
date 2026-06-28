@@ -79,7 +79,7 @@ jobs:
           docker run -d \
             --name cognizance-app \
             --restart unless-stopped \
-            -p 3000:3000 \
+            -p 80:3000 \
             --log-driver=awslogs \
             --log-opt awslogs-region=$REGION \
             --log-opt awslogs-group=/cognizance/application/prod \
