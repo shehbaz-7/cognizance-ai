@@ -6,7 +6,7 @@ resource "aws_cloudwatch_log_group" "app" {
 }
 
 resource "aws_cloudwatch_log_group" "system" {
-  name              = "/cognizance/ec2-system/${var.environment}"
+  name              = "/cognizance/eks-system/${var.environment}"
   retention_in_days = 30
 
   tags = local.common_tags
@@ -20,22 +20,6 @@ resource "aws_cloudwatch_dashboard" "main" {
       {
         type   = "metric"
         x      = 0
-        y      = 0
-        width  = 12
-        height = 6
-        properties = {
-          metrics = [
-            ["AWS/EC2", "CPUUtilization", "InstanceId", aws_instance.app.id]
-          ]
-          period = 300
-          stat   = "Average"
-          region = var.aws_region
-          title  = "EC2 CPU Utilization"
-        }
-      },
-      {
-        type   = "metric"
-        x      = 12
         y      = 0
         width  = 12
         height = 6

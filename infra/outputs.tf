@@ -1,11 +1,16 @@
-output "ec2_public_ip" {
-  description = "Public IP address of the EC2 instance"
-  value       = aws_instance.app.public_ip
+output "eks_cluster_name" {
+  description = "Name of the EKS cluster"
+  value       = aws_eks_cluster.main.name
 }
 
-output "ec2_public_dns" {
-  description = "Public DNS of the EC2 instance"
-  value       = aws_instance.app.public_dns
+output "eks_cluster_endpoint" {
+  description = "Endpoint for EKS control plane"
+  value       = aws_eks_cluster.main.endpoint
+}
+
+output "eks_cluster_security_group_id" {
+  description = "Security group ids attached to the cluster control plane"
+  value       = aws_eks_cluster.main.vpc_config[0].cluster_security_group_id
 }
 
 output "rds_endpoint" {
@@ -31,10 +36,4 @@ output "db_secret_arn" {
 output "app_config_secret_arn" {
   description = "ARN of the Secrets Manager secret for app config"
   value       = aws_secretsmanager_secret.app_config.arn
-}
-
-output "ec2_private_key" {
-  description = "The generated private key for SSH access to the EC2 instance"
-  value       = tls_private_key.pk.private_key_pem
-  sensitive   = true
 }
