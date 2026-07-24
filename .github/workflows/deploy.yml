@@ -2,11 +2,9 @@ name: CI/CD Pipeline for AWS EKS
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    branches: [ "main" ]
+  # Optional: allow manual trigger
+  workflow_dispatch:
 
 env:
   AWS_REGION: ap-south-2
